@@ -9,35 +9,31 @@ interface ArticleProps {
   createdAt: Date;
 }
 
-export default component$<ArticleProps>((props) => {
-  return (
-    <>
-      <article class="m-2 flex flex-col justify-between gap-2 p-2">
-        <div>
-          <Link href={`/article/${props.articleUrl}`}>
-            <img
-              class="h-auto w-auto"
-              src={props.imageUrl}
-              alt={props.title}
-              height={0}
-              width={0}
-            />
+export default component$<ArticleProps>(
+  ({ articleUrl, imageUrl, title, author, createdAt }) => {
+    return (
+      <article class="flex flex-col overflow-hidden rounded-xl bg-gray-800 shadow-lg transition-shadow duration-200 hover:shadow-xl">
+        <Link href={`/article/${articleUrl}`}>
+          <img
+            class="h-auto w-full object-contain"
+            src={imageUrl}
+            alt={title}
+            width={0}
+            height={0}
+          />
+        </Link>
+        <div class="space-y-2 p-4">
+          <Link href={`/article/${articleUrl}`}>
+            <h1 class="text-2xl font-semibold transition-colors duration-200 hover:text-purple-500">
+              {title}
+            </h1>
           </Link>
-        </div>
-        <div>
-          <div>
-            <Link href={`/article/${props.articleUrl}`}>
-              <h1 class="text-xl font-semibold lg:text-2xl">{props.title}</h1>
-            </Link>
-          </div>
-          <div class="flex flex-row flex-wrap justify-between">
-            <h2 class="text-sm font-normal md:text-base">{props.author}</h2>
-            <h2 class="text-sm font-light md:text-base">
-              {props.createdAt.toDateString()}
-            </h2>
+          <div class="flex justify-between text-sm text-gray-400">
+            <span>{author}</span>
+            <span>{createdAt.toDateString()}</span>
           </div>
         </div>
       </article>
-    </>
-  );
-});
+    );
+  },
+);

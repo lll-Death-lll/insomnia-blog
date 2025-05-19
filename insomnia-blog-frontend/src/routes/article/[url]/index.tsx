@@ -51,49 +51,54 @@ export default component$(() => {
   const articleResource = useArticle();
 
   return (
-    <main class="flex justify-center p-8">
+    <div class="flex justify-center">
       <Resource
         value={articleResource}
-        onResolved={(article) => {
-          return (
-            <div class="flex max-w-3xl flex-col gap-2">
-              <img
-                src={article.image_url}
-                alt={article.title}
-                width={800}
-                height={400}
-                class="h-auto max-w-3xl"
-              />
-              <h1 class="text-xl font-semibold lg:text-2xl">{article.title}</h1>
-              <div class="flex flex-row justify-between">
-                <div class="flex min-w-max flex-row justify-between">
-                  <a
-                    class="text-sm font-normal hover:cursor-pointer hover:text-purple-500 md:text-base"
-                    href={article.author_link}
-                  >
-                    <h2 class="text-sm font-normal md:text-base">
-                      {article.author_name}
-                    </h2>
-                  </a>
-                  <a
-                    class="text-sm font-normal hover:cursor-pointer hover:text-purple-500 md:text-base"
-                    href={`mailto:${article.author_email}`}
-                  >
-                    {article.author_email}
-                  </a>
-                </div>
-              </div>
-              <div dangerouslySetInnerHTML={article.content} />
-              <div class="flex flex-row justify-between">
-                <span class="text-sm font-light md:text-base">
-                  {new Date(Date.parse(article.created_at)).toLocaleString()}
-                </span>
-              </div>
+        onPending={() => (
+          <div class="w-full max-w-6xl animate-pulse space-y-4">
+            <div class="h-64 w-full rounded bg-gray-700" />
+            <div class="h-8 w-3/4 rounded bg-gray-700" />
+            <div class="h-4 w-1/2 rounded bg-gray-700" />
+          </div>
+        )}
+        onResolved={(article) => (
+          <div class="w-full max-w-4xl space-y-4 rounded-xl bg-gray-800 p-6 shadow-md">
+            <img
+              class="h-auto w-full rounded"
+              src={article.image_url}
+              alt={article.title}
+              width={0}
+              height={0}
+            />
+            <h1 class="text-3xl font-semibold">{article.title}</h1>
+            <div class="flex space-x-4 text-gray-400">
+              <a
+                class="transition-colors duration-200 hover:text-purple-500"
+                href={article.author_link}
+              >
+                {article.author_name}
+              </a>
+              <a
+                class="transition-colors duration-200 hover:text-purple-500"
+                href={`mailto:${article.author_email}`}
+              >
+                {article.author_email}
+              </a>
             </div>
-          );
-        }}
+            <div
+              class="prose prose-invert leading-8"
+              dangerouslySetInnerHTML={article.content}
+            />
+            <span class="block text-sm text-gray-500">
+              {new Date(article.created_at).toLocaleString()}
+            </span>
+          </div>
+        )}
+        onRejected={() => (
+          <div class="text-red-400">Failed to load article.</div>
+        )}
       />
-    </main>
+    </div>
   );
 });
 

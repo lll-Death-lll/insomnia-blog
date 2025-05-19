@@ -75,106 +75,119 @@ export default component$(() => {
   });
 
   return (
-    <div class="flex justify-center p-8">
-      <form preventdefault:submit onSubmit$={handleSubmit}>
-        <div class="flex min-w-max flex-row justify-between">
-          <label class="text-xl" for="title">
+    <div class="flex justify-center">
+      <form
+        preventdefault:submit
+        onSubmit$={handleSubmit}
+        class="w-full max-w-xl space-y-4 rounded-xl bg-gray-800 p-6"
+      >
+        <div class="flex flex-col">
+          <label for="title" class="mb-1 text-lg">
             Title:
           </label>
           <input
-            type="text"
             id="title"
+            type="text"
             value={formData.title}
             onInput$={(e) => {
               formData.title = (e.target as HTMLInputElement).value;
             }}
             required
+            class="rounded bg-gray-700 p-2 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
           />
         </div>
-        <div class="flex min-w-max flex-col justify-between">
-          <label class="text-xl" for="content">
-            Content:
+
+        <div class="flex flex-row items-center gap-4">
+          <label for="content" class="mb-1 text-lg">
+            Content (.md):
           </label>
           <input
+            id="content"
             type="file"
             accept=".md"
-            onChange$={async (e) => {
-              const target = e.target as HTMLInputElement;
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-              if (target.files && target.files[0]) {
-                const file = target.files[0];
+            onChange$={async (e: any) => {
+              const file = e.target.files?.[0];
+              if (file) {
                 try {
-                  const fileContent = await file.text();
-                  formData.content = fileContent;
-                } catch (error) {
-                  console.error("Error reading file:", error);
-                  formData.content = "Error: Could not read file content.";
+                  formData.content = await file.text();
+                } catch (err) {
+                  console.error("Error reading file:", err);
                 }
-              } else {
-                formData.content = "";
               }
             }}
+            required
+            class="block"
           />
         </div>
-        <div class="flex min-w-max flex-row justify-between">
-          <label class="text-xl" for="article_url">
+
+        <div class="flex flex-col">
+          <label for="article_url" class="mb-1 text-lg">
             Article URL:
           </label>
           <input
-            type="text"
             id="article_url"
+            type="text"
             value={formData.article_url}
             onInput$={(e) => {
               formData.article_url = (e.target as HTMLInputElement).value;
             }}
             required
+            class="rounded bg-gray-700 p-2 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
           />
         </div>
-        <div class="flex min-w-max flex-row justify-between">
-          <label class="text-xl" for="image_url">
+
+        <div class="flex flex-col">
+          <label for="image_url" class="mb-1 text-lg">
             Image URL:
           </label>
           <input
-            type="url"
             id="image_url"
+            type="url"
             value={formData.image_url}
             onInput$={(e) => {
               formData.image_url = (e.target as HTMLInputElement).value;
             }}
+            required
+            class="rounded bg-gray-700 p-2 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
           />
         </div>
-        <div class="flex min-w-max flex-row justify-between">
-          <label class="text-xl" for="username">
+
+        <div class="flex flex-col">
+          <label for="username" class="mb-1 text-lg">
             Username:
           </label>
           <input
-            type="text"
             id="username"
+            type="text"
             value={formData.username}
             onInput$={(e) => {
               formData.username = (e.target as HTMLInputElement).value;
             }}
             required
+            class="rounded bg-gray-700 p-2 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
           />
         </div>
-        <div class="flex min-w-max flex-row justify-between">
-          <label class="text-xl" for="password">
+
+        <div class="flex flex-col">
+          <label for="password" class="mb-1 text-lg">
             Password:
           </label>
           <input
-            type="password"
             id="password"
+            type="password"
             value={formData.password}
             onInput$={(e) => {
               formData.password = (e.target as HTMLInputElement).value;
             }}
             required
+            class="rounded bg-gray-700 p-2 text-gray-100 focus:ring-2 focus:ring-purple-500 focus:outline-none"
           />
         </div>
-        <div class="flex flex-row justify-center">
+
+        <div class="flex justify-center">
           <button
-            class="rounded-xl bg-purple-500 px-4 py-1 text-2xl text-white transition-transform ease-in-out hover:cursor-pointer hover:border-2 hover:border-purple-500 hover:bg-transparent hover:text-black"
             type="submit"
+            class="rounded-xl bg-purple-500 px-6 py-2 text-2xl text-white transition-transform duration-200 hover:scale-105 hover:border hover:border-purple-500 hover:bg-transparent hover:text-purple-500"
           >
             Submit
           </button>

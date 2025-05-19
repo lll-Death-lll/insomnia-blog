@@ -5,8 +5,8 @@
    width="20"
    version="1.1"
    id="svg1"
-   sodipodi:docname="dark-theme.svg"
-   inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +21,24 @@
          offset="0"
          id="stop1" />
     </linearGradient>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Invert"
+       id="filter2"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         type="hueRotate"
+         values="180"
+         result="color1"
+         id="feColorMatrix1" />
+      <feColorMatrix
+         values="-1 0 0 0 1 0 0 -1 0 1 0 -1 0 0 1 -0.21 -0.72 -0.07 2 0 "
+         result="color2"
+         id="feColorMatrix2" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="namedview1"
@@ -32,7 +50,7 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="17.5625"
-     inkscape:cx="-2.2491103"
+     inkscape:cx="-2.2206406"
      inkscape:cy="9.7651246"
      inkscape:window-width="1920"
      inkscape:window-height="1052"
@@ -42,5 +60,6 @@
      inkscape:current-layer="svg1" />
   <path
      d="M 10,20 C 15.522847,20 20,15.522847 20,10 20,4.4771525 15.522847,0 10,0 4.4771525,0 0,4.4771525 0,10 0,15.522847 4.4771525,20 10,20 Z m 0,-1.5 v -17 c 4.69442,0 8.5,3.8055796 8.5,8.5 0,4.69442 -3.80558,8.5 -8.5,8.5 z"
-     id="path1" />
+     id="path1"
+     style="filter:url(#filter2)" />
 </svg>
